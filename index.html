@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anker Solix Display – Web Flasher</title>
+  <script type="module" src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"></script>
+  <style>
+    body {
+      font-family: -apple-system, sans-serif;
+      background: #0a0a0a;
+      color: #eee;
+      display: flex;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+    .card {
+      background: #1a1a1a;
+      border-radius: 16px;
+      padding: 32px;
+      max-width: 480px;
+      width: 100%;
+    }
+    h1 { color: #fff; margin-bottom: 8px; }
+    p { color: #aaa; line-height: 1.5; }
+    esp-web-install-button {
+      display: block;
+      margin-top: 24px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>⚡ Anker Solix Display</h1>
+    <p>Firmware-Version 1.0.2 für ESP32-C3 (ESP32-2424S012, 1.28" GC9A01A Round Display).</p>
+    <p>Board per USB anschließen, Browser muss Chrome oder Edge sein (Web Serial API erforderlich).</p>
+    <esp-web-install-button manifest="manifest.json">
+      <button slot="activate">Firmware installieren</button>
+      <span slot="unsupported">Dein Browser unterstützt das nicht. Nutze Chrome oder Edge.</span>
+      <span slot="not-allowed">Diese Seite muss über HTTPS laufen.</span>
+    </esp-web-install-button>
+  </div>
+</body>
+</html>
