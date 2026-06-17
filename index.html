@@ -1,44 +1,177 @@
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Anker Solix Display – Web Flasher</title>
+  <title>Anker Solix Display – Flasher</title>
   <script type="module" src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"></script>
   <style>
-    body {
-      font-family: -apple-system, sans-serif;
-      background: #0a0a0a;
-      color: #eee;
-      display: flex;
-      justify-content: center;
-      padding: 40px 20px;
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+      background:#0a0a0a;
+      color:#eee;
+      display:flex;
+      justify-content:center;
+      padding:40px 20px;
+      line-height:1.55;
     }
-    .card {
-      background: #1a1a1a;
-      border-radius: 16px;
-      padding: 32px;
-      max-width: 480px;
-      width: 100%;
+    .card{
+      background:#1a1a1a;
+      border-radius:16px;
+      padding:32px;
+      max-width:480px;
+      width:100%;
+      box-shadow:0 4px 24px #0008;
     }
-    h1 { color: #fff; margin-bottom: 8px; }
-    p { color: #aaa; line-height: 1.5; }
-    esp-web-install-button {
-      display: block;
-      margin-top: 24px;
+    .icon{font-size:2.4rem;margin-bottom:4px}
+    h1{color:#fff;font-size:1.6rem;margin-bottom:4px}
+    .subtitle{color:#888;font-size:.95rem;margin-bottom:16px}
+    .badge{
+      display:inline-block;
+      background:#1f3d1f;
+      color:#5fd75f;
+      font-size:.8rem;
+      padding:4px 10px;
+      border-radius:20px;
+      margin-bottom:24px;
+    }
+    h2{
+      font-size:.78rem;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:#f0a500;
+      margin:24px 0 12px;
+    }
+    .feature-list{list-style:none}
+    .feature-list li{
+      display:flex;
+      gap:10px;
+      padding:8px 0;
+      color:#ddd;
+      font-size:.95rem;
+    }
+    .steps{list-style:none;counter-reset:step}
+    .steps li{
+      counter-increment:step;
+      display:flex;
+      gap:14px;
+      padding:10px 0;
+      color:#ddd;
+      font-size:.95rem;
+    }
+    .steps li::before{
+      content:counter(step);
+      flex-shrink:0;
+      width:26px;height:26px;
+      background:#f0a500;
+      color:#000;
+      font-weight:700;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:.85rem;
+    }
+    esp-web-install-button{display:block;margin:28px 0}
+    esp-web-install-button button{
+      width:100%;
+      padding:14px;
+      background:#f0a500;
+      border:none;
+      border-radius:10px;
+      color:#000;
+      font-size:1rem;
+      font-weight:700;
+      cursor:pointer;
+    }
+    .browser-warning{
+      font-size:.8rem;
+      color:#888;
+      text-align:center;
+      margin-top:-12px;
+      margin-bottom:24px;
+    }
+    .info-box{
+      background:#111;
+      border-radius:10px;
+      padding:14px 16px;
+      font-size:.85rem;
+      color:#999;
+      margin-bottom:16px;
+    }
+    .warning-box{
+      background:#2a1f0a;
+      border:1px solid #4a3510;
+      border-radius:10px;
+      padding:14px 16px;
+      font-size:.85rem;
+      color:#d4a850;
+    }
+    .warning-box strong{color:#f0a500}
+    a{color:#f0a500;text-decoration:none}
+    a:hover{text-decoration:underline}
+    .footer-links{
+      text-align:center;
+      font-size:.8rem;
+      color:#666;
+      margin-top:24px;
     }
   </style>
 </head>
 <body>
   <div class="card">
-    <h1>⚡ Anker Solix Display</h1>
-    <p>Firmware-Version 1.0.2 für ESP32-C3 (ESP32-2424S012, 1.28" GC9A01A Round Display).</p>
-    <p>Board per USB anschließen, Browser muss Chrome oder Edge sein (Web Serial API erforderlich).</p>
+    <div class="icon">⚡</div>
+    <h1>Anker Solix Display</h1>
+    <p class="subtitle">ESP32-C3 + GC9A01A Round Display Flasher</p>
+    <span class="badge">● Version 1.0.2</span>
+
+    <h2>📋 Features</h2>
+    <ul class="feature-list">
+      <li>☀️ Solar-Leistung (PV)</li>
+      <li>🔋 Batterie SOC % (Anker Solix E2700 Pro)</li>
+      <li>🔌 Netzbezug / Einspeisung</li>
+      <li>⚙️ Config-Portal via WLAN-Hotspot</li>
+      <li>🕐 Automatische NTP-Zeitanzeige</li>
+    </ul>
+
+    <h2>🚀 Anleitung</h2>
+    <ol class="steps">
+      <li>ESP32-C3 per USB-C anschließen</li>
+      <li>Auf <strong>Flash</strong> klicken und USB-Port auswählen</li>
+      <li>Nach dem Flash: WLAN <strong>"Anker-Display-Setup"</strong> verbinden</li>
+      <li>Browser öffnet sich → WLAN + Anker-Zugangsdaten eingeben</li>
+    </ol>
+
     <esp-web-install-button manifest="manifest.json">
-      <button slot="activate">Firmware installieren</button>
-      <span slot="unsupported">Dein Browser unterstützt das nicht. Nutze Chrome oder Edge.</span>
-      <span slot="not-allowed">Diese Seite muss über HTTPS laufen.</span>
+      <button slot="activate">⚡ Jetzt flashen</button>
+      <span slot="unsupported">⚠️ Bitte Chrome oder Edge verwenden</span>
+      <span slot="not-allowed">⚠️ Seite muss über HTTPS geöffnet werden</span>
     </esp-web-install-button>
+    <p class="browser-warning">
+      ⚠️ Funktioniert nur mit <strong>Chrome</strong> oder <strong>Edge</strong><br>
+      (kein Firefox / Safari – kein WebSerial Support)
+    </p>
+
+    <div class="info-box">
+      Nach dem Flash verbindet sich der ESP als WLAN-Hotspot.<br>
+      Zugangsdaten werden sicher im Flash gespeichert.
+    </div>
+
+    <div class="warning-box">
+      <strong>⚠️ Hinweis</strong><br>
+      Dies ist ein <strong>Bastelprojekt</strong> und funktioniert solange
+      Anker die inoffizielle Cloud-API zur Verfügung stellt. Eine Garantie gibt es nicht –
+      Anker kann die API jederzeit ändern oder abschalten.<br><br>
+      Der Materialeinsatz von ca. <strong>20&nbsp;€</strong> (ESP32-C3 Board + rundes Display)
+      ist für ein Hobbyprojekt dieser Art absolut vertretbar. 🔧
+    </div>
+
+    <p class="footer-links">
+      <a href="https://github.com/deffel6/Anker_ohne_lan">GitHub Repository</a>
+      · ESP32-C3 + GC9A01A 240×240
+    </p>
   </div>
 </body>
 </html>
